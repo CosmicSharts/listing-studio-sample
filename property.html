@@ -18,7 +18,8 @@
   .facts { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:18px 0; }
   .facts div { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 8px; text-align:center; }
   .facts b { display:block; font-size:20px; } .facts span { color:var(--mute); font-size:13px; }
-  video { width:100%; max-width:360px; border-radius:14px; display:block; margin:0 auto; background:#000; }
+  body { overflow-anchor:none; }
+  video { width:100%; height:auto; aspect-ratio:9/16; object-fit:cover; max-width:360px; border-radius:14px; display:block; margin:0 auto; background:#000; }
   .strip { display:flex; gap:10px; overflow-x:auto; padding-bottom:10px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
   .strip img { height:380px; border-radius:12px; flex:none; scroll-snap-align:start; }
   ul { padding-left:1.1em; } li { margin:.3em 0; }
