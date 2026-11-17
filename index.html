@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Listing Studio: sample portfolio</title>
+<style>
+  :root { --bg:#101218; --card:#181b23; --line:#2a2e39; --text:#eceef2; --mute:#9aa0ad; --gold:#c8a96a; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--bg); color:var(--text); font:17px/1.6 Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; -webkit-text-size-adjust:100%; }
+  main { max-width:1060px; margin:0 auto; padding:36px 18px 80px; }
+  .eyebrow, .num { color:var(--gold); font-weight:600; letter-spacing:.16em; font-size:13px; text-transform:uppercase; }
+  h1 { font-size:clamp(31px,6vw,54px); line-height:1.08; margin:.35em 0 .45em; letter-spacing:-.02em; }
+  h2 { font-size:clamp(23px,3.4vw,30px); line-height:1.2; margin:.15em 0 .4em; letter-spacing:-.01em; }
+  h3 { font-size:14px; letter-spacing:.08em; text-transform:uppercase; color:var(--mute); margin:1.2em 0 .2em; font-weight:600; }
+  p { margin:.55em 0; } b { font-weight:600; } a { color:var(--gold); }
+  .lead { font-size:clamp(18px,2.3vw,21px); color:#d5d8df; max-width:44em; }
+  .mute { color:var(--mute); } .small { font-size:15px; }
+  video, img.shot { width:100%; border-radius:14px; background:#000; display:block; }
+  .tall { max-width:330px; margin:0 auto; width:100%; }
+  .hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,330px); gap:44px; align-items:center; }
+  .note { border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:10px; padding:12px 16px; margin-top:18px; color:var(--mute); font-size:15px; }
+  nav { display:flex; flex-wrap:wrap; gap:8px; margin:30px 0 0; }
+  nav a { color:var(--text); text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:7px 14px; font-size:14px; }
+  .chapter { margin-top:64px; padding:18px 0 0; border-top:2px solid var(--gold); }
+  .chapter h2 { font-size:clamp(26px,4vw,36px); }
+  section { border-top:1px solid var(--line); margin-top:38px; padding-top:32px; }
+  .chapter + section { border-top:0; margin-top:8px; padding-top:8px; }
+  .split { display:grid; grid-template-columns:minmax(0,330px) minmax(0,1fr); gap:40px; align-items:start; }
+  ul { padding-left:1.15em; margin:.4em 0; } li { margin:.35em 0; }
+  .g5 { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; margin-top:20px; }
+  .g4 { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:20px; }
+  .g3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:14px; }
+  .g2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:14px; }
+  figure { margin:0; } figcaption { text-align:center; color:var(--mute); font-size:14px; margin-top:6px; }
+  figcaption b { color:var(--text); display:block; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; }
+  .card > b:first-child { color:var(--gold); display:block; margin-bottom:2px; }
+  .rows { margin-top:14px; border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+  .row { display:grid; grid-template-columns:1.1fr 1.4fr 1.6fr; gap:16px; padding:13px 18px; border-top:1px solid var(--line); }
+  .row.two { grid-template-columns:.7fr 2fr; }
+  .row:first-child { border-top:0; } .row.head { background:var(--card); color:var(--mute); font-size:13px; letter-spacing:.08em; text-transform:uppercase; }
+  .row span:nth-child(3) { color:#f0e2c2; } .row.two span:first-child { color:var(--gold); font-weight:600; }
+  .strip { display:flex; gap:12px; overflow-x:auto; padding:4px 0 12px; margin-top:16px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
+  .strip img { height:420px; border-radius:12px; scroll-snap-align:start; flex:none; }
+  .copy { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; font-size:16px; }
+  .copy[dir=rtl] { font-size:18px; line-height:1.9; }
+  .pages { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:16px; }
+  .pages img { width:100%; border-radius:10px; border:1px solid var(--line); display:block; }
+  .btn { display:inline-block; background:var(--gold); color:#16130c; text-decoration:none; font-weight:600; border-radius:999px; padding:11px 22px; margin-top:10px; }
+  details { border-top:1px solid var(--line); padding:14px 0; } details:last-of-type { border-bottom:1px solid var(--line); }
+  summary { cursor:pointer; font-weight:600; } details p { color:#cdd1d9; }
+  .cta { background:linear-gradient(180deg,#1d2029,#15171e); border:1px solid var(--gold); border-radius:16px; padding:26px 24px; margin-top:46px; }
+  .tick li { list-style:none; position:relative; padding-left:1.5em; } .tick { padding-left:0; } .tick li::before { content:"✓"; color:var(--gold); position:absolute; left:0; font-weight:700; }
+  @media (max-width:780px) {
+    .hero, .split { grid-template-columns:1fr; gap:22px; } .g4, .g2, .pages { grid-template-columns:repeat(2,1fr); } .g3 { grid-template-columns:1fr; }
+    .g5 { grid-template-columns:repeat(2,1fr); } .strip img { height:340px; }
+    .row { grid-template-columns:1fr; gap:2px; } .row.head { display:none; } .row span:first-child { font-weight:600; } .row:not(.two) span:nth-child(2) { color:var(--mute); font-size:15px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Sample portfolio · one listing, a full marketing studio</div>
+      <h1>Your listing photos, turned into everything you need to sell the home.</h1>
+      <p class="lead">Send the photos you already have and the listing details. Back comes a complete kit for that property: a walkthrough with real camera movement, voiceover in your buyers' languages, explainers, staged and twilight images, social posts for two weeks, a web page with a WhatsApp button, and the documents that win the owner's instruction in the first place.</p>
+      <p class="lead">No shoot, no videographer visit, nothing to learn. You review it and post it.</p>
+      <div class="note">Everything on this page is one invented apartment. The photos are computer-generated placeholders, and every price, distance, size, name, date, review and figure is made up. It shows the formats, ready to be rebuilt on a real listing.</div>
+    </div>
+    <div class="tall"><video src="showreel.mp4" poster="showreel.jpg" controls playsinline preload="none"></video><figcaption>A one-minute tour of the pack. Sound on.</figcaption></div>
+  </div>
+
+  <nav>
+    <a href="#videos">Listing videos</a><a href="#explainers">Explainers</a><a href="#images">Image services</a><a href="#social">Social kit</a><a href="#win">Win and close</a><a href="#brand">Your brand</a><a href="#company">For the brokerage</a><a href="#menu">Service menu</a><a href="#how">How it works</a>
+  </nav>
+
+  <section>
+    <div class="eyebrow">Why bother</div>
+    <h2>Most listing reels look the same, because they are made the same way.</h2>
+    <p>The usual reel is a slideshow: photos sliding past with a caption and a trending song, made on a phone in ten minutes. Every agent can make one, so buyers scroll past them, and owners cannot tell one agent's marketing from the next. This portfolio is built around three jobs a phone editor cannot do for you.</p>
+    <div class="g3">
+      <div class="card"><b>Win the listing</b>Show an owner exactly how their home will be marketed, and report back every week.</div>
+      <div class="card"><b>Sell it faster</b>More formats, more languages and more reasons to post about the same home.</div>
+      <div class="card"><b>Look like a firm</b>One consistent, branded standard across every listing and every agent.</div>
+    </div>
+    <div class="rows">
+      <div class="row head"><span></span><span>Phone slideshow</span><span>This studio</span></div>
+      <div class="row"><span>Movement</span><span>Photos slide or zoom</span><span>The camera glides through each room</span></div>
+      <div class="row"><span>Languages</span><span>One caption, usually English</span><span>Voiceover in four languages, plus captions</span></div>
+      <div class="row"><span>Information</span><span>Price and bedrooms as text</span><span>Map, floor plan, price, costs and market explainers</span></div>
+      <div class="row"><span>Empty or untidy rooms</span><span>Shown as they are</span><span>Staged, tidied and twilight versions, clearly labelled</span></div>
+      <div class="row"><span>Posts per listing</span><span>One</span><span>Two weeks of different posts from one set of photos</span></div>
+      <div class="row"><span>For the owner</span><span>Nothing</span><span>A marketing plan before, a report every week</span></div>
+      <div class="row"><span>Branding</span><span>Whatever the app template offers</span><span>Your colours, type, logo, number and permit on every piece</span></div>
+    </div>
+  </section>
+
+  <!-- ============ LISTING VIDEOS ============ -->
+  <div class="chapter" id="videos"><div class="eyebrow">Part one</div><h2>Listing videos</h2></div>
+
+  <section class="split">
+    <div class="tall"><video src="reel-moves.mp4" poster="reel-moves.jpg" controls playsinline preload="none"></video></div>
+    <div>
+      <div class="num">01</div>
+      <h2>Walkthrough movement from still photos</h2>
+      <p>Each photo becomes a few seconds of moving camera. Near furniture slides against the far windows and the view, the way it does when someone walks a gimbal through the room, so the reel reads as a filmed walkthrough.</p>
+      <h3>How it is made</h3>
+      <p>Your photo is the first frame. An AI video model continues it into a short, slow camera move, and the shots are cut together with room names, key facts, music and your details.</p>
+      <h3>Where to use it</h3>
+      <ul><li>The main reel on Instagram, TikTok and YouTube Shorts.</li><li>WhatsApp to a buyer who asks "do you have a video?"</li><li>The video slot on portal listings.</li></ul>
+      <h3>Why it helps</h3>
+      <ul><li>Movement holds attention longer than a slideshow.</li><li>No shoot to book, no access to arrange with a tenant, no waiting for an edit.</li></ul>
+      <h3>What gets checked</h3>
+      <p>Every moving shot is compared with its photo before it goes in. If the movement invents or changes anything in the room or the view, that shot is replaced with a plain camera pan across the real photo. An advert must only show what is there.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">02</div>
+    <h2>The same reel in your buyers' languages</h2>
+    <p>One short script, voiced in English, Arabic, Russian and Mandarin over the same pictures with music underneath. The fifth version adds on-screen captions, for the many people who watch with the sound off.</p>
+    <div class="g5">
+      <figure><video src="reel-en.mp4" poster="reel-moves.jpg" controls playsinline preload="none"></video><figcaption>English</figcaption></figure>
+      <figure><video src="reel-ar.mp4" poster="reel-moves.jpg" controls playsinline preload="none"></video><figcaption>Arabic</figcaption></figure>
+      <figure><video src="reel-ru.mp4" poster="reel-moves.jpg" controls playsinline preload="none"></video><figcaption>Russian</figcaption></figure>
+      <figure><video src="reel-zh.mp4" poster="reel-moves.jpg" controls playsinline preload="none"></video><figcaption>Mandarin</figcaption></figure>
+      <figure><video src="reel-captions.mp4" poster="reel-captions.jpg" controls playsinline preload="none"></video><figcaption>English with captions</figcaption></figure>
+    </div>
+    <div class="g3">
+      <div class="card"><b>Where to use it</b>Overseas buyer lists, WhatsApp broadcasts, and adverts targeted by language.</div>
+      <div class="card"><b>Why it helps</b>A buyer hears the home described in their own language before they ever message you.</div>
+      <div class="card"><b>What gets checked</b>A native speaker approves each script once, then the wording is reused. These samples have not had that check yet.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">03</div>
+    <h2>The wide version</h2>
+    <p>The same film in 16:9, for portal video slots, YouTube, website embeds and screens in the office window.</p>
+    <video src="reel-16x9.mp4" poster="reel-16x9.jpg" controls playsinline preload="none" style="margin-top:14px"></video>
+  </section>
+
+  <!-- ============ EXPLAINERS ============ -->
+  <div class="chapter" id="explainers"><div class="eyebrow">Part two</div><h2>Explainers that answer buyers' questions</h2></div>
+
+  <section>
+    <p>Short animated clips, each answering one question a buyer always asks. They work as separate posts, as stories, or as replies to an enquiry, and they show that you know the numbers.</p>
+    <div class="g3">
+      <figure><video src="data.mp4" poster="data.jpg" controls playsinline preload="none"></video><figcaption><b>04 · Map, floor plan and price</b>What is nearby and how long it takes, the plan lighting up room by room, and price per square foot against the area.</figcaption></figure>
+      <figure><video src="market.mp4" poster="market.jpg" controls playsinline preload="none"></video><figcaption><b>05 · Market update and cost to buy</b>A twelve-month price chart for the community, then the full budget a buyer needs: fees, deposit and monthly payment.</figcaption></figure>
+      <figure><video src="area-guide.mp4" poster="area-guide.jpg" controls playsinline preload="none"></video><figcaption><b>06 · Area guide</b>Four reasons to live in the community, for buyers who are choosing an area before a home.</figcaption></figure>
+    </div>
+    <div class="g3">
+      <div class="card"><b>Where to use it</b>Second and third posts from one listing, investor replies, and a monthly market post under your name.</div>
+      <div class="card"><b>Why it helps</b>It saves you typing the same answers, and it brings in buyers who are already serious.</div>
+      <div class="card"><b>What gets checked</b>Samples use a schematic map and invented figures. Real ones use real map data, your floor plan and published transaction figures, with the source on screen.</div>
+    </div>
+  </section>
+
+  <!-- ============ IMAGE SERVICES ============ -->
+  <div class="chapter" id="images"><div class="eyebrow">Part three</div><h2>Image services</h2></div>
+
+  <section class="split">
+    <div class="g2" style="margin-top:0">
+      <figure><video src="before-after.mp4" poster="before-after.jpg" controls playsinline preload="none"></video><figcaption><b>07 · Before and after</b>Staging, declutter, twilight</figcaption></figure>
+      <figure><video src="staging-looks.mp4" poster="staging-looks.jpg" controls playsinline preload="none"></video><figcaption><b>08 · One room, three looks</b>Modern, Scandinavian, bold</figcaption></figure>
+    </div>
+    <div>
+      <h2>Make every photo the best version of the room</h2>
+      <ul>
+        <li><b>Virtual staging:</b> an empty room shown furnished, in a style chosen for the likely buyer.</li>
+        <li><b>Declutter:</b> a lived-in or tenanted home shown tidy, without asking anyone to move their things.</li>
+        <li><b>Day to dusk:</b> a daytime exterior shown at twilight with the lights on.</li>
+      </ul>
+      <h3>Also available, not shown here</h3>
+      <ul><li>Straighten, brighten and colour-correct phone photos.</li><li>Replace a grey sky with a clear one.</li><li>Blur faces, family photos, number plates and paperwork for privacy.</li><li>Redraw a scanned floor plan cleanly, with sizes.</li></ul>
+      <h3>Why it helps</h3>
+      <p>Buyers struggle to picture an empty room, tenanted homes rarely photograph well, and twilight exteriors are the images that get clicked. Staging a room digitally costs a fraction of furnishing it.</p>
+      <h3>What gets checked</h3>
+      <p>Only furniture, clutter or light may change. Walls, windows, floor and view must stay exactly as photographed, and every edited picture carries a line saying so.</p>
+    </div>
+  </section>
+
+  <!-- ============ SOCIAL KIT ============ -->
+  <div class="chapter" id="social"><div class="eyebrow">Part four</div><h2>Social kit</h2></div>
+
+  <section class="split">
+    <div class="tall"><video src="announcements.mp4" poster="announcements.jpg" controls playsinline preload="none"></video></div>
+    <div>
+      <div class="num">09</div>
+      <h2>Announcement posts</h2>
+      <p>Just listed, open house, price reduced and sold. Four short posts that mark each stage of a listing's life and give you a reason to post about the same home again.</p>
+      <ul><li><b>Just listed</b> starts the launch.</li><li><b>Open house</b> carries the day and time.</li><li><b>Price reduced</b> shows the old price struck through.</li><li><b>Sold</b> is your proof for the next owner, with an invitation to sellers.</li></ul>
+      <p class="mute small">Each one is made in seconds from the listing's own photos, in your brand style.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">10</div>
+    <h2>A seven-slide carousel</h2>
+    <p>For the Instagram feed: the hero image, the rooms, key facts, floor plan, map, the numbers and your contact card. Swipe across.</p>
+    <div class="strip">
+      <img src="carousel-1.jpg" alt="Hero slide" loading="lazy"><img src="carousel-2.jpg" alt="Rooms" loading="lazy"><img src="carousel-3.jpg" alt="Key facts" loading="lazy"><img src="carousel-4.jpg" alt="Floor plan" loading="lazy"><img src="carousel-5.jpg" alt="Map" loading="lazy"><img src="carousel-6.jpg" alt="Numbers" loading="lazy"><img src="carousel-7.jpg" alt="Contact card" loading="lazy">
+    </div>
+  </section>
+
+  <section>
+    <div class="num">11</div>
+    <h2>Two weeks of posts from one listing</h2>
+    <p>The hard part of social media is knowing what to post next. Every pack comes with a plan, so one set of photos keeps a home in front of buyers for a fortnight.</p>
+    <div class="rows">
+      <div class="row two head"><span>Day</span><span>Post</span></div>
+      <div class="row two"><span>Mon</span><span>Just-listed post and the walkthrough reel</span></div>
+      <div class="row two"><span>Tue</span><span>Seven-slide carousel</span></div>
+      <div class="row two"><span>Wed</span><span>Floor plan explainer as a story</span></div>
+      <div class="row two"><span>Thu</span><span>Arabic and Russian reels to WhatsApp lists</span></div>
+      <div class="row two"><span>Fri</span><span>Staging before and after</span></div>
+      <div class="row two"><span>Sat</span><span>Open-house invitation</span></div>
+      <div class="row two"><span>Sun</span><span>Area guide</span></div>
+      <div class="row two"><span>Mon</span><span>Price-per-square-foot explainer</span></div>
+      <div class="row two"><span>Tue</span><span>Twilight hero image</span></div>
+      <div class="row two"><span>Wed</span><span>Mandarin reel, and the wide version on YouTube</span></div>
+      <div class="row two"><span>Thu</span><span>Cost-to-buy explainer</span></div>
+      <div class="row two"><span>Fri</span><span>Client review card</span></div>
+      <div class="row two"><span>Sat</span><span>Market update</span></div>
+      <div class="row two"><span>Sun</span><span>Price update, or the Sold post</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="num">12</div>
+    <h2>The words, ready to paste</h2>
+    <p>Portal descriptions in English and Arabic, title options, and a caption with hashtags for each post.</p>
+    <h3>Portal titles</h3>
+    <div class="copy">Full Marina View | High Floor | Vacant 2 Bed<br>Bright 2 Bed with Marina Panorama | Ready to Move<br>High Floor 2 Bed | Two En-Suites | Marina View</div>
+    <h3>Description, English</h3>
+    <div class="copy">A bright two-bedroom apartment on a high floor in Dubai Marina, with a full view of the water from floor-to-ceiling windows. The open-plan living and dining room leads to a wide balcony, the kitchen has a stone island and integrated appliances, and both bedrooms have their own bathroom. The building offers a pool, a gym and covered parking. The apartment is vacant and ready to transfer.</div>
+    <h3>Description, Arabic</h3>
+    <div class="copy" dir="rtl" lang="ar">شقة مشرقة من غرفتي نوم في طابق مرتفع بدبي مارينا، بإطلالة كاملة على المياه من نوافذ ممتدة من الأرض إلى السقف. صالة المعيشة والطعام المفتوحة تتصل بشرفة واسعة، والمطبخ مجهّز بجزيرة حجرية وأجهزة مدمجة، ولكل غرفة نوم حمّامها الخاص. يضم المبنى مسبحاً ونادياً رياضياً وموقف سيارات مغطّى. الشقة شاغرة وجاهزة لنقل الملكية.</div>
+    <h3>Instagram caption</h3>
+    <div class="copy">Wake up to the whole marina. 🌊<br>2 bed · 3 bath · 1,320 sq ft · high floor · vacant<br>AED 2,450,000<br>Message me for the full video and a viewing this week.<br><span class="mute">#dubaimarina #dubairealestate #dubaiproperties #marinaview #apartmentforsale #dubaihomes</span></div>
+    <p class="mute small">The Arabic text has not yet been checked by a native speaker.</p>
+  </section>
+
+  <!-- ============ WIN AND CLOSE ============ -->
+  <div class="chapter" id="win"><div class="eyebrow">Part five</div><h2>Win the listing, close the buyer</h2></div>
+
+  <section>
+    <div class="num">13</div>
+    <h2>For the owner: a marketing plan and a weekly report</h2>
+    <p>Owners choose the agent who shows them a plan, and stay with the agent who keeps them informed. The first page goes to the owner before they sign. The second goes to them every Monday.</p>
+    <div class="pages">
+      <a href="seller-pitch.jpg"><img src="seller-pitch.jpg" alt="Marketing plan for an owner" loading="lazy"></a>
+      <a href="owner-report.jpg"><img src="owner-report.jpg" alt="Weekly owner report" loading="lazy"></a>
+    </div>
+    <a class="btn" href="owner-documents.pdf">Open both as a PDF</a>
+    <div class="g3">
+      <div class="card"><b>Where to use it</b>The listing appointment, exclusivity conversations, and renewals.</div>
+      <div class="card"><b>Why it helps</b>It turns "we'll put it on the portals" into a visible plan, and it makes a price conversation easier because the owner has seen the numbers each week.</div>
+      <div class="card"><b>What it needs</b>The report is filled from the figures you already see on your portal and social accounts.</div>
+    </div>
+  </section>
+
+  <section class="split">
+    <div class="tall"><video src="buyer-tools.mp4" poster="buyer-tools.jpg" controls playsinline preload="none"></video></div>
+    <div>
+      <div class="num">14</div>
+      <h2>For the buyer: three tools that move a decision along</h2>
+      <ul>
+        <li><b>Investor snapshot:</b> yield, service charge, rent and a five-year view on one screen.</li>
+        <li><b>Payment plan:</b> an off-plan schedule shown as a timeline, with the amount due at each stage.</li>
+        <li><b>Shortlist comparison:</b> the homes a buyer viewed, side by side, sent the same evening.</li>
+      </ul>
+      <h3>Where to use it</h3>
+      <p>Follow-up after viewings, investor enquiries, and off-plan launches where the payment plan is the selling point.</p>
+      <h3>Why it helps</h3>
+      <p>The follow-up message is where most enquiries go quiet. A personal comparison gives the buyer something to reply to, and something to show a partner.</p>
+    </div>
+  </section>
+
+  <section class="split">
+    <div class="tall"><a href="property.html"><img class="shot" src="reel-moves.jpg" alt="Sample property page"></a></div>
+    <div>
+      <div class="num">15</div>
+      <h2>A web page for each listing</h2>
+      <p>One link that holds everything about the home: the video, photos, floor plan, map, numbers and a WhatsApp button with the message already written. It opens instantly on a phone, with no app and no login.</p>
+      <ul><li>Put the link in your bio, your WhatsApp replies and your email signature.</li><li>Print it as a QR code on the brochure and the window card.</li><li>A different link for each platform shows you where enquiries come from.</li></ul>
+      <a class="btn" href="property.html">Open the sample property page</a>
+    </div>
+  </section>
+
+  <section class="split">
+    <div class="tall"><video src="brand.mp4" poster="brand.jpg" controls playsinline preload="none"></video></div>
+    <div>
+      <div class="num">16</div>
+      <h2>Your own profile and review cards</h2>
+      <p>A short "meet your agent" card with your areas, languages and record, and client reviews turned into posts. People choose an agent as much as a property, and these fill the gaps between listings.</p>
+      <p class="mute small">Your photo replaces the initials. Reviews are used only with the client's permission.</p>
+    </div>
+  </section>
+
+  <!-- ============ BRAND ============ -->
+  <div class="chapter" id="brand"><div class="eyebrow">Part six</div><h2>Your brand, not a template</h2></div>
+
+  <section>
+    <p>The same footage in five different looks. Type, colour, layout and the end card all follow the brokerage's guidelines, or your own taste, and once set they apply to every piece in the pack.</p>
+    <div class="g5">
+      <figure><video src="style-signature.mp4" poster="style-signature.jpg" controls playsinline preload="none"></video><figcaption><b>Signature</b>Clean sans, gold accent</figcaption></figure>
+      <figure><video src="style-editorial.mp4" poster="style-editorial.jpg" controls playsinline preload="none"></video><figcaption><b>Editorial</b>Serif, centred, cream card</figcaption></figure>
+      <figure><video src="style-bold.mp4" poster="style-bold.jpg" controls playsinline preload="none"></video><figcaption><b>Bold</b>Condensed capitals, colour blocks</figcaption></figure>
+      <figure><video src="style-minimal.mp4" poster="style-minimal.jpg" controls playsinline preload="none"></video><figcaption><b>Minimal</b>Light type, small labels</figcaption></figure>
+      <figure><video src="style-corporate.mp4" poster="style-corporate.jpg" controls playsinline preload="none"></video><figcaption><b>Corporate</b>Navy panel, logo, green accent</figcaption></figure>
+    </div>
+    <p class="mute small" style="margin-top:14px">Send a brand guide, a website or a few posts you like, and the style is matched to it.</p>
+  </section>
+
+  <!-- ============ BROKERAGE ============ -->
+  <div class="chapter" id="company"><div class="eyebrow">Part seven</div><h2>For the brokerage</h2></div>
+
+  <section>
+    <p>What changes when a whole office uses the same studio.</p>
+    <div class="g3">
+      <div class="card"><b>One standard</b>Every agent's listings carry the same look, logo and wording rules, whoever made the post.</div>
+      <div class="card"><b>Every listing covered</b>Because packs are built from a template, the small listings get the same treatment as the flagship ones.</div>
+      <div class="card"><b>New agents start with content</b>A profile card, an area guide and their first listing pack in their first week.</div>
+      <div class="card"><b>A monthly market video</b>The company's own market update by community, under the company name.</div>
+      <div class="card"><b>A stronger listing pitch</b>Every agent walks into an appointment with the same marketing plan and proof of past results.</div>
+      <div class="card"><b>Owner reporting</b>Weekly reports go out in one format, which protects exclusives and renewals.</div>
+    </div>
+    <h3>The delivery checklist on every piece</h3>
+    <ul class="tick">
+      <li>The advert permit number is on the end card, with a place for its QR code.</li>
+      <li>Every staged, tidied or relit image says so on screen.</li>
+      <li>Every moving shot has been checked against its photo.</li>
+      <li>Figures name their source, or are left out.</li>
+      <li>Music is original, so there is nothing to clear.</li>
+      <li>Nothing is posted for you: the agent or the marketing lead approves each piece.</li>
+    </ul>
+  </section>
+
+  <!-- ============ MENU ============ -->
+  <div class="chapter" id="menu"><div class="eyebrow">Service menu</div><h2>Take one piece, or the whole kit</h2></div>
+
+  <section>
+    <div class="g2">
+      <div class="card"><b>Listing videos</b>Walkthrough reel · language versions · captions · wide version · cover image</div>
+      <div class="card"><b>Explainers</b>Map · floor plan · price comparison · cost to buy · market update · area guide</div>
+      <div class="card"><b>Image services</b>Virtual staging · declutter · day to dusk · photo correction · privacy blur · floor plan redraw</div>
+      <div class="card"><b>Social kit</b>Announcement posts · carousel · two-week plan · captions and descriptions in two languages</div>
+      <div class="card"><b>Owner and buyer tools</b>Marketing plan · weekly owner report · investor snapshot · payment plan · shortlist comparison · listing web page</div>
+      <div class="card"><b>Brand</b>Style set-up from your guidelines · agent profile card · review cards · company market video</div>
+    </div>
+    <h3>Ways to buy it</h3>
+    <div class="g3">
+      <div class="card"><b>Single listing</b>The full kit for one property, when you want a launch to land.</div>
+      <div class="card"><b>Agent, monthly</b>A set number of listings each month, plus your profile and review posts.</div>
+      <div class="card"><b>Brokerage</b>Brand set-up once, then every agent's listings and the monthly market video.</div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="eyebrow">How it works</div>
+    <h2>Three steps, and you only do the first and the last.</h2>
+    <div class="g3">
+      <div class="card"><b>1. Send</b>8 to 15 photos, the floor plan if you have one, the listing details and the permit number. WhatsApp or a shared folder is fine.</div>
+      <div class="card"><b>2. Review</b>The pack comes back for you to check. Ask for changes to wording, shot order, music or colours.</div>
+      <div class="card"><b>3. Post</b>Files arrive sized for each platform, with the two-week plan, ready to upload from your phone.</div>
+    </div>
+    <p class="mute small" style="margin-top:14px">Nothing is posted for you and no account access is needed. You decide what goes out under your name.</p>
+  </section>
+
+  <section id="faq">
+    <div class="eyebrow">Questions</div>
+    <h2>Things agents usually ask</h2>
+    <details><summary>Do you need to visit the property?</summary><p>No. Everything is built from the photos and details you already have for the listing.</p></details>
+    <details><summary>What photos work best?</summary><p>The normal wide listing photos, as large as you have them. One per room, plus the view and the building. Phone photos work if they are level and well lit, and they can be corrected.</p></details>
+    <details><summary>Does it work for villas, off-plan and rentals?</summary><p>Yes. Villas get more rooms and outdoor shots. Off-plan uses the developer's approved renders and adds the payment plan. Rentals usually take a shorter pack.</p></details>
+    <details><summary>Is it honest to use AI on a property advert?</summary><p>The rule here is that the property must never be changed. Movement is checked shot by shot against the photo, staged and relit pictures are labelled on screen, and anything that fails the check falls back to the untouched photo.</p></details>
+    <details><summary>Can it carry my brokerage's look?</summary><p>Yes. Colours, typefaces, logo, your name and number are set once and reused on every piece. The end card has a place for the permit number and its QR code.</p></details>
+    <details><summary>What about music?</summary><p>Each video comes with an original instrumental track, so there is nothing to clear. You can still swap in a trending sound inside Instagram or TikTok when you post.</p></details>
+    <details><summary>Which languages?</summary><p>English, Arabic, Russian and Mandarin are shown here. Others can be added to suit your buyers.</p></details>
+    <details><summary>Can I change things after I see it?</summary><p>Yes. Wording, the order of rooms, which shots move, and the figures shown are all quick to change.</p></details>
+  </section>
+
+  <div class="cta">
+    <div class="eyebrow">Next step</div>
+    <h2>Try it on one of your own listings.</h2>
+    <p>Pick one live property and send its photos and details. You will get its kit back, so you can judge this on a home you know, with your own name on it.</p>
+  </div>
+  <p class="mute small" style="margin-top:28px">Sample portfolio. All property details, figures, names, reviews and images on this page are invented for demonstration.</p>
+</main>
+</body>
+</html>

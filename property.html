@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>2 Bed Apartment, Dubai Marina (sample)</title>
+<style>
+  :root { --bg:#101218; --card:#181b23; --line:#2a2e39; --text:#eceef2; --mute:#9aa0ad; --gold:#c8a96a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:17px/1.6 Inter, -apple-system, "Helvetica Neue", Arial, sans-serif; padding-bottom:92px; }
+  main { max-width:760px; margin:0 auto; padding:0 18px 40px; }
+  .demo { background:#2a2414; color:#e9d9b0; font-size:14px; padding:9px 18px; text-align:center; }
+  .eyebrow { color:var(--gold); font-weight:600; letter-spacing:.16em; font-size:13px; text-transform:uppercase; margin-top:26px; }
+  h1 { font-size:clamp(30px,7vw,44px); line-height:1.1; margin:.2em 0 .1em; letter-spacing:-.02em; }
+  h2 { font-size:22px; margin:1.8em 0 .5em; }
+  .price { font-size:clamp(28px,6vw,38px); font-weight:700; color:var(--gold); }
+  .facts { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:18px 0; }
+  .facts div { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 8px; text-align:center; }
+  .facts b { display:block; font-size:20px; } .facts span { color:var(--mute); font-size:13px; }
+  video { width:100%; max-width:360px; border-radius:14px; display:block; margin:0 auto; background:#000; }
+  .strip { display:flex; gap:10px; overflow-x:auto; padding-bottom:10px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
+  .strip img { height:380px; border-radius:12px; flex:none; scroll-snap-align:start; }
+  ul { padding-left:1.1em; } li { margin:.3em 0; }
+  .agent { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; display:flex; gap:16px; align-items:center; }
+  .avatar { width:64px; height:64px; border-radius:50%; border:2px solid var(--gold); display:grid; place-items:center; color:var(--gold); font-weight:600; font-size:22px; flex:none; }
+  .mute { color:var(--mute); font-size:14px; }
+  .bar { position:fixed; left:0; right:0; bottom:0; background:rgba(16,18,24,.94); border-top:1px solid var(--line); padding:12px 18px; display:flex; gap:10px; justify-content:center; backdrop-filter:blur(8px); }
+  .btn { flex:1; max-width:340px; text-align:center; text-decoration:none; font-weight:600; border-radius:999px; padding:14px 18px; }
+  .wa { background:#25d366; color:#06210f; } .call { border:1px solid var(--gold); color:var(--gold); }
+  a.back { color:var(--mute); font-size:14px; text-decoration:none; display:inline-block; margin-top:16px; }
+</style>
+</head>
+<body>
+<div class="demo">Sample page. This apartment, its photos, figures and contact details are invented.</div>
+<main>
+  <a class="back" href="index.html">← Back to the portfolio</a>
+  <div class="eyebrow">Dubai Marina · for sale</div>
+  <h1>2 Bed Apartment with a full marina view</h1>
+  <div class="price">AED 2,450,000</div>
+  <div class="facts">
+    <div><b>2</b><span>Beds</span></div><div><b>3</b><span>Baths</span></div><div><b>1,320</b><span>sq ft</span></div><div><b>High</b><span>Floor</span></div>
+  </div>
+  <video src="reel-en.mp4" poster="reel-moves.jpg" controls playsinline preload="none"></video>
+  <p class="mute" style="text-align:center">Also in <a href="reel-ar.mp4" style="color:var(--gold)">Arabic</a>, <a href="reel-ru.mp4" style="color:var(--gold)">Russian</a> and <a href="reel-zh.mp4" style="color:var(--gold)">Mandarin</a></p>
+
+  <h2>Photos</h2>
+  <div class="strip">
+    <img src="g-02-living.jpg" alt="Living room" loading="lazy"><img src="g-03-kitchen.jpg" alt="Kitchen" loading="lazy"><img src="g-04-bedroom.jpg" alt="Master bedroom" loading="lazy"><img src="g-05-bathroom.jpg" alt="En-suite" loading="lazy"><img src="g-06-balcony.jpg" alt="Balcony" loading="lazy"><img src="g-07-bedroom2.jpg" alt="Bedroom two" loading="lazy"><img src="g-08-pool.jpg" alt="Pool deck" loading="lazy"><img src="g-11-pool-dusk.jpg" alt="Pool deck at dusk, digitally relit" loading="lazy"><img src="g-01-exterior.jpg" alt="The building" loading="lazy">
+  </div>
+
+  <h2>About this home</h2>
+  <p>A bright two-bedroom apartment on a high floor in Dubai Marina, with a full view of the water from floor-to-ceiling windows. The open-plan living and dining room leads to a wide balcony, the kitchen has a stone island and integrated appliances, and both bedrooms have their own bathroom.</p>
+  <ul><li>Full marina view</li><li>Vacant and ready to transfer</li><li>Pool, gym and covered parking</li></ul>
+
+  <h2>Floor plan, location and numbers</h2>
+  <div class="strip">
+    <img src="carousel-4.jpg" alt="Floor plan" loading="lazy"><img src="carousel-5.jpg" alt="What is nearby" loading="lazy"><img src="carousel-6.jpg" alt="Price comparison" loading="lazy">
+  </div>
+
+  <h2>Your agent</h2>
+  <div class="agent"><div class="avatar">AN</div><div><b>Agent Name</b><br><span class="mute">Brokerage Name · English, Arabic, Russian<br>Permit 0000000000</span></div></div>
+</main>
+<div class="bar">
+  <a class="btn wa" href="#" onclick="alert('On a real page this opens WhatsApp with the message: Hi, I would like to view the 2 bed in Dubai Marina.');return false;">WhatsApp to view</a>
+  <a class="btn call" href="#" onclick="alert('On a real page this calls the agent.');return false;">Call</a>
+</div>
+</body>
+</html>
